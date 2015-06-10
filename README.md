@@ -2,6 +2,7 @@
 Auto pilot your es6 generator functions
 
 ### Usage Example
+    var autopilot = require('auto-pilot');
     autopilot(function *(input){
         var name = yield httpRequestData(input); //a promise resolve ' World!'
         
@@ -16,8 +17,8 @@ Auto pilot your es6 generator functions
     });
     
 ### Notice
-require a global Promise polyfill
+Require a global Promise polyfill
 
-### develop/test
+### Develop/Test
     $ npm install
     $ npm run test
