@@ -1,7 +1,9 @@
 var isGenerator = require('is-generator');
 var isGeneratorFn = require('is-generator').fn;
 
-var isThenable = (o) => o && typeof(o.then)==='function';
+var isThenable = function(o){
+	return (o && typeof(o.then)==='function');
+};
 
 
 function promisfy (func, ctx) {

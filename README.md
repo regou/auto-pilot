@@ -14,3 +14,6 @@ Auto pilot your es6 generator functions
     },function(err){
         console.warn(err);
     });
+    
+### Notice
+require a global Promise polyfill
