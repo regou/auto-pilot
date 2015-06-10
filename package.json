@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/regou/auto-pilot/issues"
   },
-  "homepage": "https://github.com/regou/auto-pilot"
+  "homepage": "https://github.com/regou/auto-pilot",
+  "dependencies": {
+    "is-generator": "1.0.*"
+  }
 }

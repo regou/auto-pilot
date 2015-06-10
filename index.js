@@ -1,7 +1,35 @@
-function isGenerator(obj) {
-	return typeof obj.next === 'function' && typeof obj.throw === 'function';
-}
+var isGenerator = require('is-generator');
+var isGeneratorFn = require('is-generator').fn;
+
 var isThenable = (o) => o && typeof(o.then)==='function';
+
+
+function promisfy (func, ctx) {
+	return function () {
+		var args = arguments;
+		if (typeof func === "function") {
+			var res = func.apply(ctx || null, args);
+			if(isThenable(res)){
+				return res;
+			}else{
+				return new Promise(function (resolve, reject) {
+					if(res===false){
+						reject(res)
+					}else{
+						resolve(res);
+					}
+
+				});
+			}
+		} else {
+			return new Promise(function (resolve, reject) {
+				reject(func);
+			});
+		}
+
+	}
+};
+
 
 function autopilot (gen){
 
@@ -13,7 +41,7 @@ function autopilot (gen){
 		if (typeof gen === 'function'){gen = gen.call(self);} //May not pre exec
 		if (!gen || typeof gen.next !== 'function'){return resolve(gen);}
 
-		goNext();
+
 
 
 		function goNext(res) {
@@ -25,9 +53,7 @@ function autopilot (gen){
 			}
 			next(ret);
 		}
-
-
-		function onRejected(err) {
+		function goRejected(err) {
 			var ret;
 			try {
 				ret = gen.throw(err);
@@ -40,15 +66,21 @@ function autopilot (gen){
 
 
 		function next(ret) {
-			if (ret.done){return resolve(ret.value)};
-			var value = toPromise.call(ctx, ret.value);
-			if (value && isPromise(value)) return value.then(goNext, onRejected);
-			return onRejected(new TypeError('You may only yield a function, promise, generator, array, or object, '
-				+ 'but the following object was passed: "' + String(ret.value) + '"'));
+			if(ret.done){return resolve(ret.value)};
+			var value = ret.value;
+
+			if(value && typeof(value) === 'function'){
+				value = promisfy(value)();
+			}
+
+			if(value && isThenable(value)){return value.then(goNext, goRejected);}
+
+			return goRejected(new TypeError('Please yield a function or promise, ' + 'The following type was passed: "' + typeof(ret.value) + '"'));
 		}
 
 
 
+		goNext();
 
 	});
 };
