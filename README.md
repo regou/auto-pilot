@@ -4,7 +4,7 @@ Auto pilot your es6 generator functions
 ### Usage Example
     var autopilot = require('auto-pilot');
     autopilot(function *(input){
-        var name = yield httpRequestData(input); //a promise resolve ' World!'
+        var name = yield httpRequestData(input); //yield a promise resolve ' World!'
         
         var str = yield function(){return 'Hello! ' + name; }; //also can yield a function
         
