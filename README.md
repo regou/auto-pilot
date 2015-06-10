@@ -17,3 +17,7 @@ Auto pilot your es6 generator functions
     
 ### Notice
 require a global Promise polyfill
+
+### develop/test
+    $ npm install
+    $ npm run test
