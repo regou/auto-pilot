@@ -6,9 +6,9 @@ Auto pilot your es6 generator functions
     autopilot(function *(input){
         var name = yield httpRequestData(input); //a promise resolve ' World!'
         
-        var prefix = yield function(){return 'Hello! '};
+        var str = yield function(){return 'Hello! ' + name; }; //also can yield a function
         
-        return prefix + String(data);       
+        return str;       
         
     }).then(function(str){
         console.log(str) //  'Hello!  World!'
