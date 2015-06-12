@@ -1,6 +1,6 @@
 {
   "name": "auto-pilot",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Auto pilot your es6 generator functions",
   "main": "index.js",
   "scripts": {
