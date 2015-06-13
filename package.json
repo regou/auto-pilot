@@ -1,6 +1,6 @@
 {
   "name": "auto-pilot",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Auto pilot your es6 generator functions",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,8 @@
   "keywords": [
     "es6",
     "gennerator",
-    "auto"
+    "auto",
+    "coroutine"
   ],
   "author": "regou",
   "license": "Apache License",

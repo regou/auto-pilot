@@ -1,23 +1,27 @@
 var autopilot = require('./index');
 
 
-var time = function(){
+var time = function(waitTime){
 	return new Promise(function(res,rej){
 		setTimeout(function(){
 			res(7);
-		},3000)
+		},waitTime)
 	})
 };
 
 
-autopilot(function *(){
-	var a = yield function(){return 4};
 
-	var b = yield time();
+var genFunc = function *(waitTime){
+	var a = yield function(){return waitTime};
+
+	var b = yield time(a);
 
 	return [a,b];
 
-}).then(function(o){
+};
+
+
+autopilot(genFunc(3000)).then(function(o){
 	console.log('ok',o);
 },function(err){
 	console.log('err',err);
