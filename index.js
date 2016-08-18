@@ -33,12 +33,24 @@ function promisfy (func, ctx) {
 };
 
 
-function autopilot (gen){
+function autopilot (gen,promiseCreator){
 
 
-	   var self = this;
+	var self = this;
 
-    return new Promise(function(resolve,reject){
+	var creator = function (func) {
+		return new Promise(func)
+	};
+
+
+	if(typeof promiseCreator === 'function'){
+		creator = promiseCreator;
+	}
+	
+
+
+
+    return creator(function(resolve,reject){
 
 		if (typeof gen === 'function'){gen = gen.call(self);} //May not pre exec
 		if (!gen || typeof gen.next !== 'function'){return resolve(gen);}

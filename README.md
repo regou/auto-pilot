@@ -19,6 +19,15 @@ autopilot(joint('An example string')).then(function(str){
     console.warn(err);
 });
 ```
+
+### Use in angularjs
+```js
+function customPromiseCreator(func){
+	return $q(func);
+}
+autopilot(joint('Exaple string'),customPromiseCreator);
+
+```
     
 ### Notice
 Require a global Promise polyfill
