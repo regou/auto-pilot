@@ -1,7 +1,7 @@
 {
   "name": "auto-pilot",
-  "version": "0.2.3",
-  "description": "Auto pilot your es6 generator functions",
+  "version": "0.3.0",
+  "description": "Auto pilot your es6 generator functions ( Support AngularJS )",
   "main": "index.js",
   "scripts": {
     "test": "node --harmony test.js"
