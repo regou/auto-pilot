@@ -6,7 +6,7 @@
   "description": "Auto pilot your es6 generator functions ( Support AngularJS )",
   "main": "index.js",
   "scripts": {
-    "test": "node --harmony test.js"
+    "test": "mocha test.js"
   },
   "repository": {
     "type": "git",
