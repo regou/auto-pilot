@@ -28,9 +28,9 @@ it('Can run yield', function (done) {
 		.then(function(o){
 			should(o).deepEqual([500,7]);
 			done();
-	},function(err){
-		console.log('err',err);
-	});
+		},function(err){
+			console.log('err',err);
+		});
 
 });
 

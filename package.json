@@ -1,6 +1,6 @@
 {
   "name": "auto-pilot",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "changelog": false,
   "release": true,
   "description": "Auto pilot your es6 generator functions ( Support AngularJS )",
@@ -24,7 +24,9 @@
     "url": "https://github.com/regou/auto-pilot/issues"
   },
   "homepage": "https://github.com/regou/auto-pilot",
-  "dependencies": {
-    "is-generator": "1.0.*"
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^2.3.0",
+    "should": "^7.1.0"
   }
 }
