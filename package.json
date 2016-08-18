@@ -1,6 +1,8 @@
 {
   "name": "auto-pilot",
-  "version": "0.3.0",
+  "version": "0.3.2",
+  "changelog": false,
+  "release": true,
   "description": "Auto pilot your es6 generator functions ( Support AngularJS )",
   "main": "index.js",
   "scripts": {

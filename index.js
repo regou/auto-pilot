@@ -5,34 +5,6 @@ var isThenable = function(o){
 	return (o && typeof(o.then)==='function');
 };
 
-
-function promisfy (func, ctx) {
-	return function () {
-		var args = arguments;
-		if (typeof func === "function") {
-			var res = func.apply(ctx || null, args);
-			if(isThenable(res)){
-				return res;
-			}else{
-				return new Promise(function (resolve, reject) {
-					if(res===false){
-						reject(res)
-					}else{
-						resolve(res);
-					}
-
-				});
-			}
-		} else {
-			return new Promise(function (resolve, reject) {
-				reject(func);
-			});
-		}
-
-	}
-};
-
-
 function autopilot (gen,promiseCreator){
 
 
@@ -41,12 +13,36 @@ function autopilot (gen,promiseCreator){
 	var creator = function (func) {
 		return new Promise(func)
 	};
-
-
 	if(typeof promiseCreator === 'function'){
 		creator = promiseCreator;
 	}
-	
+
+	function promisfy (func, ctx) {
+		return function () {
+			var args = arguments;
+			if (typeof func === "function") {
+				var res = func.apply(ctx || null, args);
+				if(isThenable(res)){
+					return res;
+				}else{
+					return creator(function (resolve, reject) {
+						if(res===false){
+							reject(res)
+						}else{
+							resolve(res);
+						}
+
+					});
+				}
+			} else {
+				return creator(function (resolve, reject) {
+					reject(func);
+				});
+			}
+
+		}
+	};
+
 
 
 

@@ -1,4 +1,6 @@
 var autopilot = require('./index');
+var should = require('should/as-function');
+
 
 
 var time = function(waitTime){
@@ -20,10 +22,16 @@ var genFunc = function *(waitTime){
 
 };
 
+it('Can run yield', function (done) {
 
-autopilot(genFunc(3000)).then(function(o){
-	console.log('ok',o);
-},function(err){
-	console.log('err',err);
+	autopilot(genFunc(500))
+		.then(function(o){
+			should(o).deepEqual([500,7]);
+			done();
+	},function(err){
+		console.log('err',err);
+	});
+
 });
+
 
